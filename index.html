@@ -4,16 +4,57 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Check cert expiry date</title>
+    <style>
+      body {
+        max-width: 750px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .container {
+        margin: 0 1em;
+      }
+
+      form {
+        display: flex;
+        align-items: center;
+      }
+
+      input {
+        flex: 1;
+        margin: 0.5em;
+        width: 100%;
+      }
+
+      input,
+      button {
+        font-size: 100%;
+      }
+
+      pre.output {
+        font-size: 1.2rem;
+        line-height: 1.4;
+      }
+
+      @media (max-width: 750px) {
+        form {
+          flex-direction: column;
+        }
+      }
+    </style>
   </head>
   <body>
     <h1>Check cert expiry date</h1>
-    <form>
+    <form class="container">
       <label for="url">Enter URL or Domain:</label>
       <input id="url" type="text" required>
       <button>Check</button>
     </form>
-    <p class="output">
-    </p>
+    <pre class="container output">
+    </pre>
     <script>
       const input = document.querySelector("#url");
       const output = document.querySelector(".output");

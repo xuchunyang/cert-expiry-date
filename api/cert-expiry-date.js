@@ -11,10 +11,10 @@ module.exports = (req, res) => {
   checkCertExpiration(url)
     .then(data => {
       res.statusCode = 200;
-      res.end(JSON.stringify(data));
+      res.end(JSON.stringify(data, null, 4));
     })
     .catch(error => {
       res.statusCode = 400;
-      res.end(JSON.stringify(error));
+      res.end(JSON.stringify(error, null, 4));
     });
 };
