@@ -3,6 +3,7 @@ const checkCertExpiration = require("check-cert-expiration");
 module.exports = (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Cache-Control", "max-age=0, s-maxage=86400");
 
   const { url } = req.query;
   if (!url) {
