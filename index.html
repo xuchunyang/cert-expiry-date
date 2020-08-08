@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Check cert expiry date</title>
+  </head>
+  <body>
+    <h1>Check cert expiry date</h1>
+    <form>
+      <label for="url">Enter URL or Domain:</label>
+      <input id="url" type="text" required>
+      <button>Check</button>
+    </form>
+    <p class="output">
+    </p>
+    <script>
+      const input = document.querySelector("#url");
+      const output = document.querySelector(".output");
+
+      document.querySelector("form").onsubmit = (e) => {
+        e.preventDefault();
+        const url = input.value;
+        output.textContent = `Checking ${url}...`;
+        fetch("api/cert-expiry-date?url=" + url)
+          .then(res => res.text())
+          .then(txt => output.textContent = txt)
+          .catch(error => output.textContent = error.message);
+      };
+    </script>
+  </body>
+</html>
