@@ -1,7 +1,7 @@
 const checkCertExpiration = require("check-cert-expiration");
 
 module.exports = (req, res) => {
-  const { url } = req.query();
+  const { url } = req.query;
   if (!url) {
     res.statusCode = 400;
     res.end("Error: empty url");
