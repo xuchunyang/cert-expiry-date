@@ -19,6 +19,7 @@ module.exports = (req, res) => {
     })
     .catch(error => {
       res.statusCode = 400;
-      res.end(JSON.stringify(error, null, 4));
+      const { name, message } = error;
+      res.end(JSON.stringify({ name, message }, null, 4));
     });
 };
