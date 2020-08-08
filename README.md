@@ -33,3 +33,8 @@ strict-transport-security: max-age=63072000; includeSubDomains; preload
 ```
 
 The API supports [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
+
+## Privacy
+
+I don't store logs. However, anyone can view the realtime logs at
+https://cert-expiry-date.vercel.app/_logs
