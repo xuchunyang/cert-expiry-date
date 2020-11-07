@@ -10,7 +10,7 @@
     <title>Check cert expiry date</title>
     <style>
       body {
-        max-width: 750px;
+        max-width: 40em;
         margin: 0 auto;
       }
 
@@ -43,6 +43,11 @@
         line-height: 1.4;
       }
 
+      footer {
+        margin-top: 4em;
+        text-align: center;
+      }
+
       @media (max-width: 750px) {
         form {
           flex-direction: column;
@@ -51,19 +56,22 @@
     </style>
   </head>
   <body>
-    <h1>Check cert expiry date</h1>
-    <form class="container">
-      <label for="url">Enter URL or Domain:</label>
-      <input
-        id="url"
-        name="url"
-        type="text"
-        required
-        placeholder="e.g., example.com"
-      />
-      <button>Check</button>
-    </form>
-    <pre class="container output"></pre>
+    <div class="container">
+      <h1>Check cert expiry date</h1>
+      <form>
+        <label for="url">Enter URL or Domain:</label>
+        <input
+          id="url"
+          name="url"
+          type="text"
+          required
+          placeholder="e.g., example.com"
+        />
+        <button>Check</button>
+      </form>
+      <pre class="output"></pre>
+      <footer><a href="#">View source on GitHub</a></footer>
+    </div>
     <script>
       const url = new URLSearchParams(document.location.search).get("url");
       if (url) {
