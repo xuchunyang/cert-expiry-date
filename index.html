@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Check when website HTTPS certificate expiries"
+    />
     <title>Check cert expiry date</title>
     <style>
       body {
@@ -50,24 +54,28 @@
     <h1>Check cert expiry date</h1>
     <form class="container">
       <label for="url">Enter URL or Domain:</label>
-      <input id="url" type="text" required placeholder="e.g., example.com">
+      <input
+        id="url"
+        name="url"
+        type="text"
+        required
+        placeholder="e.g., example.com"
+      />
       <button>Check</button>
     </form>
-    <pre class="container output">
-    </pre>
+    <pre class="container output"></pre>
     <script>
-      const input = document.querySelector("#url");
-      const output = document.querySelector(".output");
-
-      document.querySelector("form").onsubmit = (e) => {
-        e.preventDefault();
-        const url = input.value;
-        output.textContent = `Checking ${url}...`;
+      const url = new URLSearchParams(document.location.search).get("url");
+      if (url) {
+        document.querySelector("#url").value = url;
+        const output = document.querySelector(".output");
+        const absUrl = url.startsWith("https://") ? url : "https://" + url;
+        output.innerHTML = `Checking <a href="${absUrl}">${url}</a> ...`;
         fetch("api/cert-expiry-date?url=" + url)
-          .then(res => res.text())
-          .then(txt => output.textContent = txt)
-          .catch(error => output.textContent = error.message);
-      };
+          .then((res) => res.text())
+          .then((txt) => (output.textContent = txt))
+          .catch((error) => (output.textContent = error.message));
+      }
     </script>
   </body>
 </html>
