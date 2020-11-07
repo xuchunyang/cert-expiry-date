@@ -11,7 +11,7 @@
     <style>
       body {
         font-family: system-ui, serif;
-        max-width: 40em;
+        max-width: 50em;
         margin: 0 auto;
       }
 
@@ -41,14 +41,14 @@
         padding: 0.5em;
       }
 
-      pre.output {
-        font-size: 1.2rem;
-        line-height: 1.4;
+      .output {
+        margin-top: 2em;
       }
 
       footer {
         margin-top: 4em;
-        text-align: center;
+        text-align: right;
+        font-size: 90%;
       }
 
       @media (max-width: 750px) {
@@ -72,7 +72,7 @@
         />
         <button>Check</button>
       </form>
-      <pre class="output"></pre>
+      <p class="output"></p>
       <footer><a href="#">View source on GitHub</a></footer>
     </div>
     <script>
@@ -82,10 +82,18 @@
         const output = document.querySelector(".output");
         const absUrl = url.startsWith("https://") ? url : "https://" + url;
         output.innerHTML = `Checking <a href="${absUrl}">${url}</a> ...`;
-        fetch("api/cert-expiry-date?url=" + url)
-          .then((res) => res.text())
-          .then((txt) => (output.textContent = txt))
-          .catch((error) => (output.textContent = error.message));
+        (async () => {
+          const response = await fetch("api/cert-expiry-date?url=" + url);
+          const data = await response.json();
+          console.log(data);
+          if (!response.ok) {
+            const error = data;
+            output.textContent = `${error.name}: ${error.message}`;
+            return;
+          }
+          const { daysLeft } = data;
+          output.innerHTML = `${daysLeft} days until the certificate expires for <a href="${url}">${url}</a>`;
+        })();
       }
     </script>
   </body>
